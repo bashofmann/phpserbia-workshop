@@ -16,11 +16,11 @@ helm upgrade --install --namespace cert-manager -f cert-manager.yaml cert-manage
 
 * Create ClusterIssuer
 ```
-kubectl apply -f digitalocean-dns-secret.yaml
-kubectl apply -f clusterissuer-digitalocean.yaml
+kubectl apply -f digitalocean-dns-secret.yaml -n default
+kubectl apply -f clusterissuer-digitalocean.yaml -n default
 ```
 
 * Create wildcard certificate
 ```
-kubectl apply -f certificate.yaml
+kubectl apply -f certificate.yaml -n default
 ```
