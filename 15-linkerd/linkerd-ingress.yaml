@@ -1,0 +1,17 @@
+kind: Ingress
+apiVersion: extensions/v1beta1
+metadata:
+  name: linkerd-dashboard
+  namespace: linkerd
+spec:
+  tls:
+    - hosts:
+        - linkerd-dashboard.workshop.plgrnd.be
+  rules:
+    - host: linkerd-dashboard.workshop.plgrnd.be
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: linkerd-web
+              servicePort: 8084

@@ -1,0 +1,53 @@
+## Details about the image to be pulled.
+image:
+  name: registry.opensource.zalan.do/teapot/external-dns
+  tag: v0.5.13
+
+## This controls which types of resource external-dns should 'watch' for new
+## DNS entries.
+sources:
+  - service
+  - ingress
+
+## The DNS provider where the DNS records will be created (options: aws, google, inmemory, azure, rfc2136 )
+provider: digitalocean
+
+# DigitalOcean API token to inject as environment variable
+digitalocean:
+  apiToken: "xxx"
+
+## Limit possible target zones by domain suffixes (optional)
+domainFilters: ["plgrnd.be"]
+## Limit possible target zones by zone id (optional)
+zoneIdFilters: []
+# Filter sources managed by external-dns via annotation using label selector semantics (default: all sources)
+annotationFilter: ""
+## Adjust the interval for DNS updates
+interval: "1m"
+
+# Registry to use for ownership (txt or noop)
+registry: "txt"
+
+# When using the TXT registry, a name that identifies this instance of ExternalDNS
+txtOwnerId: "workshop"
+
+## Modify how DNS records are sychronized between sources and providers (options: sync, upsert-only )
+policy: upsert-only
+
+## CPU and Memory limit and request for external-dns
+resources:
+  limits:
+    memory: 50Mi
+  requests:
+    memory: 50Mi
+    cpu: 10m
+
+securityContext:
+   readOnlyRootFilesystem: true
+   runAsNonRoot: true
+   runAsUser: 65534 # 65534 is nobody - revise aws.credentialsPath when changing uid
+   capabilities:
+     drop: ["ALL"]
+
+rbac:
+  create: true
