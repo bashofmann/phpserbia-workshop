@@ -4,7 +4,7 @@
 
 * Install cert-manager
 ```
-kubectl apply -f https://raw.githubusercontent.com/jetstack/cert-manager/release-0.7/deploy/manifests/00-crds.yaml
+kubectl apply -f https://raw.githubusercontent.com/jetstack/cert-manager/release-0.8/deploy/manifests/00-crds.yaml
 kubectl create namespace cert-manager
 kubectl label namespace cert-manager certmanager.k8s.io/disable-validation=true
 helm repo add jetstack https://charts.jetstack.io
@@ -16,8 +16,8 @@ helm upgrade --install --namespace cert-manager -f cert-manager.yaml cert-manage
 
 * Create ClusterIssuer
 ```
-kubectl apply -f digitalocean-dns-secret.yaml -n default
-kubectl apply -f clusterissuer-digitalocean.yaml -n default
+kubectl apply -f digitalocean-dns-secret.yaml
+kubectl apply -f clusterissuer-digitalocean.yaml
 ```
 
 * Create wildcard certificate
